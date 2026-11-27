@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f5f7f5" />
+    <meta name="description" content="Aperçu de structure UX pour ALINEO — données non connectées." />
+    <title>ALINEO — votre espace d’action</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Aller au contenu principal</a>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Navigation ALINEO">
+        <a class="brand" href="#today" data-view="today" aria-label="ALINEO, accueil">
+          <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="brand-name">ALINEO</span>
+        </a>
+        <div class="workspace-label">ESPACE PERSONNEL</div>
+        <nav class="primary-nav" aria-label="Espaces">
+          <button class="nav-item is-active" type="button" data-view="today" aria-current="page" aria-label="Aujourd’hui" title="Aujourd’hui">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3.5" y="4" width="17" height="16" rx="3"/><path d="M8 2.8v3M16 2.8v3M3.5 9h17M8 13h2m4 0h2m-8 3h2"/></svg><span>Aujourd’hui</span>
+          </button>
+          <button class="nav-item" type="button" data-view="projects" aria-label="Projets, évolution prévue au Lot 2" title="Projets · Lot 2">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3.5 7.5h7l2 2h8v9.2a1.8 1.8 0 0 1-1.8 1.8H5.3a1.8 1.8 0 0 1-1.8-1.8z"/><path d="M3.5 7.5V5.3a1.8 1.8 0 0 1 1.8-1.8h4.2l2 2h5"/></svg><span>Projets</span><span class="nav-phase" aria-hidden="true" title="Évolution prévue au Lot 2">L2</span>
+          </button>
+          <button class="nav-item" type="button" data-view="calendar" aria-label="Calendrier, évolution prévue aux Lots 2 et 3" title="Calendrier · Lots 2 et 3">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3.5" y="4" width="17" height="16" rx="3"/><path d="M8 2.8v3M16 2.8v3M3.5 9h17M8 13h2m4 0h2m-8 3h2"/></svg><span>Calendrier</span><span class="nav-phase" aria-hidden="true" title="Lots 2 et 3">L2/3</span>
+          </button>
+          <button class="nav-item" type="button" data-view="focus" aria-label="Focus, évolution prévue au Lot 2" title="Focus · Lot 2">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.3 2M9 2.8h6M12 2.8v1"/></svg><span>Focus</span><span class="nav-phase" aria-hidden="true" title="Évolution prévue au Lot 2">L2</span>
+          </button>
+          <button class="nav-item" type="button" data-view="life-core" aria-label="Life Core" title="Life Core">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 20.3s-7.7-4.4-7.7-10.1A4.2 4.2 0 0 1 12 7.6a4.2 4.2 0 0 1 7.7 2.6c0 5.7-7.7 10.1-7.7 10.1Z"/><path d="M8.5 12h2.2l1.2-2.1 1.5 4.1 1.1-2h1"/></svg><span>Life Core</span>
+          </button>
+          <button class="nav-item" type="button" data-view="habits" aria-label="Habitudes, évolution prévue au Lot 2" title="Habitudes · Lot 2">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12.3 9.2 16.5 19 6.8"/><path d="M20 12a8 8 0 1 1-4.2-7.1"/></svg><span>Habitudes</span><span class="nav-phase" aria-hidden="true" title="Évolution prévue au Lot 2">L2</span>
+          </button>
+        </nav>
+        <div class="sidebar-divider"></div>
+        <div class="utility-nav" aria-label="Outils">
+          <button class="nav-item utility-item" type="button" data-view="activity" aria-label="Activité de l’agent" title="Activité de l’agent">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 12h3l2.1-5 4.2 10 2.1-5H20"/><path d="M3.5 5.5v13h17"/></svg><span>Activité de l’agent</span>
+          </button>
+          <button class="nav-item utility-item" type="button" data-view="settings" aria-label="Paramètres" title="Paramètres">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1a1.8 1.8 0 1 1-2.5 2.5l-.1-.1a1.8 1.8 0 0 0-3.1 1.3v.2a1.8 1.8 0 1 1-3.6 0v-.2A1.8 1.8 0 0 0 7.1 17l-.1.1a1.8 1.8 0 1 1-2.5-2.5l.1-.1a1.8 1.8 0 0 0-1.3-3.1h-.2a1.8 1.8 0 1 1 0-3.6h.2A1.8 1.8 0 0 0 4.6 5.2l-.1-.1A1.8 1.8 0 1 1 7 2.6l.1.1a1.8 1.8 0 0 0 3.1-1.3v-.2a1.8 1.8 0 1 1 3.6 0v.2A1.8 1.8 0 0 0 17 2.7l.1-.1a1.8 1.8 0 1 1 2.5 2.5l-.1.1a1.8 1.8 0 0 0 1.3 3.1h.2a1.8 1.8 0 1 1 0 3.6h-.2a1.8 1.8 0 0 0-1.4 3.1Z" transform="translate(.3 1) scale(.95)"/></svg><span>Paramètres</span>
+          </button>
+        </div>
+        <div class="sidebar-bottom">
+          <div class="prototype-status"><span class="status-dot" aria-hidden="true"></span><span>Maquette non connectée</span></div>
+          <p>Vos repères restent les vôtres.</p>
+        </div>
+      </aside>
+
+      <div class="main-column">
+        <header class="topbar">
+          <div class="breadcrumbs"><span class="breadcrumb-brand">ALINEO</span><span class="breadcrumb-slash" aria-hidden="true">/</span><span id="breadcrumb-current" aria-live="polite" aria-atomic="true">Aujourd’hui</span></div>
+          <div class="topbar-actions">
+            <button class="search-trigger" type="button" aria-label="Rechercher — indisponible dans cet aperçu" data-demo-action="La recherche globale est prévue quand les données seront connectées.">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.5"/><path d="m16 16 4.3 4.3"/></svg><span>Rechercher</span><kbd>⌘ K</kbd>
+            </button>
+            <button class="button button-primary top-capture" type="button" aria-label="Capturer une intention" data-open-capture>
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span>Capturer une intention</span>
+            </button>
+          </div>
+        </header>
+        <div class="prototype-banner" id="prototype-banner" role="status">
+          <span class="banner-mark" aria-hidden="true">i</span>
+          <p><strong>Aperçu de structure</strong><span> — aucune donnée n’est enregistrée ou envoyée.</span></p>
+          <button class="banner-close" type="button" aria-label="Masquer cet avis">×</button>
+        </div>
+        <main id="main" class="content-area" tabindex="-1"></main>
+        <footer class="page-footer"><span>ALINEO · Proposition UX/UI v0.1</span><span>Les contrôles d’accessibilité restent à mesurer.</span></footer>
+      </div>
+    </div>
+
+    <nav class="mobile-nav" aria-label="Navigation mobile">
+      <button class="mobile-nav-item is-active" type="button" data-view="today" aria-current="page"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3.5" y="4" width="17" height="16" rx="3"/><path d="M8 2.8v3M16 2.8v3M3.5 9h17M8 13h2m4 0h2"/></svg><span>Aujourd’hui</span></button>
+      <button class="mobile-nav-item" type="button" data-view="projects"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3.5 7.5h7l2 2h8v9.2a1.8 1.8 0 0 1-1.8 1.8H5.3a1.8 1.8 0 0 1-1.8-1.8z"/><path d="M3.5 7.5V5.3a1.8 1.8 0 0 1 1.8-1.8h4.2l2 2h5"/></svg><span>Projets</span></button>
+      <button class="mobile-nav-item" type="button" data-view="calendar"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3.5" y="4" width="17" height="16" rx="3"/><path d="M8 2.8v3M16 2.8v3M3.5 9h17M8 13h2m4 0h2"/></svg><span>Calendrier</span></button>
+      <button class="mobile-nav-item" type="button" data-view="focus"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.3 2"/></svg><span>Focus</span></button>
+      <button class="mobile-nav-item" type="button" id="open-more" aria-haspopup="dialog" aria-controls="more-dialog"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/></svg><span>Plus</span></button>
+    </nav>
+
+    <dialog class="capture-dialog" id="capture-dialog" aria-labelledby="capture-title" aria-describedby="capture-description">
+      <div class="dialog-topline"><span class="eyebrow">CAPTURE</span><button class="icon-button" type="button" data-close-capture aria-label="Fermer la capture">×</button></div>
+      <h2 id="capture-title">Qu’est-ce que vous voulez avancer&nbsp;?</h2>
+      <p class="dialog-lead" id="capture-description">Écrivez l’intention avec vos mots. Les détails manquants resteront inconnus jusqu’à ce que vous les précisiez.</p>
+      <form id="capture-form" novalidate>
+        <label class="field-label" for="capture-text">Votre intention</label>
+        <textarea id="capture-text" name="captureText" rows="4" placeholder="Saisissez une intention…" required aria-describedby="capture-hint capture-error" aria-invalid="false"></textarea>
+        <p class="field-hint" id="capture-hint">Aucun brouillon n’est enregistré dans cet aperçu. Aucune IA n’est connectée.</p>
+        <p class="field-error" id="capture-error" role="alert" hidden></p>
+        <div class="draft-preview" id="draft-preview" hidden>
+          <div class="draft-preview-head"><span class="status-pill status-neutral">Brouillon · non enregistré</span><span class="preview-label">Aperçu local uniquement</span></div>
+          <p id="draft-text"></p>
+          <p class="draft-note">Date, durée et priorité : non renseignées. ALINEO ne les devine pas.</p>
+        </div>
+        <div class="dialog-actions">
+          <button class="button button-secondary" type="button" data-close-capture>Annuler</button>
+          <button class="button button-primary" type="submit" id="preview-draft">Prévisualiser le brouillon</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog class="more-dialog" id="more-dialog" aria-labelledby="more-title">
+      <div class="dialog-topline"><span class="eyebrow">AUTRES ESPACES</span><button class="icon-button" type="button" data-close-more aria-label="Fermer le menu">×</button></div>
+      <h2 id="more-title">Où souhaitez-vous aller&nbsp;?</h2>
+      <div class="more-links">
+        <button type="button" data-view="life-core"><span class="mini-symbol">♡</span><span><strong>Life Core</strong><small>Vos engagements protégés</small></span><span aria-hidden="true">→</span></button>
+        <button type="button" data-view="habits"><span class="mini-symbol">✓</span><span><strong>Habitudes</strong><small>Vos habitudes, sans score punitif</small></span><span aria-hidden="true">→</span></button>
+        <button type="button" data-view="activity"><span class="mini-symbol">⌁</span><span><strong>Activité de l’agent</strong><small>Événements réellement observés</small></span><span aria-hidden="true">→</span></button>
+        <button type="button" data-view="settings"><span class="mini-symbol">⚙</span><span><strong>Paramètres</strong><small>Fuseau, disponibilités, permissions</small></span><span aria-hidden="true">→</span></button>
+      </div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+    <script src="app.js"></script>
+  </body>
+</html>
