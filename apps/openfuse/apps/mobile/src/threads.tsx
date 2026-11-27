@@ -43,11 +43,12 @@ const ThreadContext = createContext<{
   localThreads: LocalConversationSummary[];
   mainId: string;
   loading: boolean;
+  starting: boolean;
   error: string;
   retry: () => void;
   refreshLocalThreads: () => Promise<void>;
   select: (selection: Selection) => void;
-  start: () => void;
+  start: () => Promise<boolean>;
   claimPrompt: (id: number) => boolean;
 } | null>(null);
 export function ThreadsProvider({ children }: { children: ReactNode }) {
@@ -59,6 +60,8 @@ export function ThreadsProvider({ children }: { children: ReactNode }) {
   const [localThreads, setLocalThreads] = useState<LocalConversationSummary[]>([]);
   const [mainId, setMainId] = useState("local");
   const [loading, setLoading] = useState(true);
+  const [starting, setStarting] = useState(false);
+  const startingRef = useRef(false);
   const [error, setError] = useState("");
   const [attempt, setAttempt] = useState(0);
   const refreshLocalThreads = useCallback(async () => {
@@ -136,22 +139,45 @@ export function ThreadsProvider({ children }: { children: ReactNode }) {
     setVisited((items) => (items.some((item) => item.id === next.id) ? items : [...items, next]));
     navigate("chat");
   }
-  function start() {
+  async function start(): Promise<boolean> {
+    if (startingRef.current) return false;
     const next = { id: newThreadId(), existing: false };
+    setError("");
+    if (enabled) {
+      startingRef.current = true;
+      setStarting(true);
+      try {
+        const created = await api.request<{ threadId: string }>(
+          "/api/threads",
+          { threadId: next.id },
+          "POST",
+        );
+        const selection = { id: created.threadId, existing: true };
+        setSelection(selection);
+        setVisited((items) => [...items, selection]);
+        navigate("chat");
+        return true;
+      } catch (e) {
+        setError(e instanceof Error ? e.message : String(e));
+        return false;
+      } finally {
+        startingRef.current = false;
+        setStarting(false);
+      }
+    }
     setSelection(next);
     setVisited((items) => [...items, next]);
-    if (!enabled) {
-      const updatedAt = new Date().toISOString();
-      setLocalThreads((items) => [
-        { id: next.id, title: "Nouvelle conversation", updatedAt },
-        ...items.filter((item) => item.id !== next.id),
-      ]);
-      void api
-        .request(`/api/conversations/${next.id}`, { messages: [] }, "PUT")
-        .then(() => refreshLocalThreads())
-        .catch((e) => setError(e instanceof Error ? e.message : String(e)));
-    }
+    const updatedAt = new Date().toISOString();
+    setLocalThreads((items) => [
+      { id: next.id, title: "Nouvelle conversation", updatedAt },
+      ...items.filter((item) => item.id !== next.id),
+    ]);
+    void api
+      .request(`/api/conversations/${next.id}`, { messages: [] }, "PUT")
+      .then(() => refreshLocalThreads())
+      .catch((e) => setError(e instanceof Error ? e.message : String(e)));
     navigate("chat");
+    return true;
   }
   return (
     <ThreadContext.Provider
@@ -166,6 +192,7 @@ export function ThreadsProvider({ children }: { children: ReactNode }) {
         visited,
         localThreads,
         loading,
+        starting,
         error,
         retry: () => setAttempt((n) => n + 1),
         refreshLocalThreads,
@@ -191,6 +218,7 @@ export function ThreadsSheet({ onClose }: { onClose: () => void }) {
     localThreads,
     mainId,
     loading,
+    starting,
     error: mainError,
     retry,
     select,
@@ -245,10 +273,12 @@ export function ThreadsSheet({ onClose }: { onClose: () => void }) {
             <Button
               primary
               icon={Plus}
-              onPress={() => {
-                start();
-                onClose();
-              }}
+              busy={starting}
+              onPress={() =>
+                void start().then((started) => {
+                  if (started) onClose();
+                })
+              }
             >
               Nouvelle conversation secondaire
             </Button>
@@ -259,7 +289,7 @@ export function ThreadsSheet({ onClose }: { onClose: () => void }) {
               </Button>
             </View>
             {threads.isLoading && <ActivityIndicator color={colors.accentDark} />}
-            <ErrorNotice error={error || threads.error?.message} />
+            <ErrorNotice error={error || mainError || threads.error?.message} />
             {threads.error && (
               <Button small onPress={threads.refetchThreads}>
                 Réessayer le chargement des conversations
@@ -387,10 +417,11 @@ export function ThreadsSheet({ onClose }: { onClose: () => void }) {
             <Button
               primary
               icon={Plus}
-              onPress={() => {
-                start();
-                onClose();
-              }}
+              onPress={() =>
+                void start().then((started) => {
+                  if (started) onClose();
+                })
+              }
             >
               Nouvelle conversation
             </Button>

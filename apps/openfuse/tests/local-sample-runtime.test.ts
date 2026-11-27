@@ -47,4 +47,11 @@ test("local sample mode opens without Intelligence credentials or remote rich th
   const mainThread = await app.request("/api/main-thread", { headers });
   assert.equal(mainThread.status, 503);
   assert.match(await mainThread.text(), /Rich Threads are not configured/);
+  const remoteSecondaryThread = await app.request("/api/threads", {
+    method: "POST",
+    headers: { ...headers, "Content-Type": "application/json" },
+    body: JSON.stringify({ threadId: "4db1741e-43e7-4d41-b25f-7bb5f30f7715" }),
+  });
+  assert.equal(remoteSecondaryThread.status, 503);
+  assert.match(await remoteSecondaryThread.text(), /Rich Threads are not configured/);
 });

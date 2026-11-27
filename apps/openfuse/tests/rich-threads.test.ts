@@ -70,6 +70,50 @@ test("a failed main-thread connection remains an error and does not create anoth
   assert.deepEqual(await db.get("local-user", "conversation-settings", "main"), before);
 });
 
+test("secondary thread creation provisions the authenticated owner's CopilotKit thread", async (t) => {
+  const threadId = "4db1741e-43e7-4d41-b25f-7bb5f30f7715";
+  const calls: Parameters<CopilotKitIntelligence["getOrCreateThread"]>[0][] = [];
+  t.mock.method(
+    CopilotKitIntelligence.prototype,
+    "getOrCreateThread",
+    async (input: Parameters<CopilotKitIntelligence["getOrCreateThread"]>[0]) => {
+      calls.push(input);
+      return {
+        thread: { id: input.threadId, name: null },
+        created: calls.length === 1,
+      };
+    },
+  );
+  const request = (authorization = true) =>
+    app.request("/api/threads", {
+      method: "POST",
+      headers: authorization ? headers() : { "Content-Type": "application/json" },
+      body: JSON.stringify({ threadId, userId: "forged-user", agentId: "forged-agent" }),
+    });
+  assert.equal((await request(false)).status, 401);
+  assert.equal(calls.length, 0);
+  const created = await request();
+  assert.equal(created.status, 201, await created.clone().text());
+  assert.deepEqual(await created.json(), { threadId, existing: true });
+  const retried = await request();
+  assert.equal(retried.status, 200, await retried.clone().text());
+  assert.deepEqual(await retried.json(), { threadId, existing: true });
+  assert.deepEqual(calls, [
+    {
+      threadId,
+      userId: "local-user",
+      agentId: "default",
+      name: "Nouvelle conversation",
+    },
+    {
+      threadId,
+      userId: "local-user",
+      agentId: "default",
+      name: "Nouvelle conversation",
+    },
+  ]);
+});
+
 test("Rich Threads lists through CopilotKit, scopes by authenticated owner and preserves pagination", async (t) => {
   const calls: Parameters<CopilotKitIntelligence["listThreads"]>[0][] = [];
   t.mock.method(

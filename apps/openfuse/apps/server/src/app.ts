@@ -257,6 +257,25 @@ export async function createApp(
       201,
     );
   });
+  app.post("/api/threads", async (c) => {
+    if (!intelligence)
+      throw new AppError("Rich Threads are not configured for this local workspace", 503);
+    const { threadId } = z.object({ threadId: z.string().uuid() }).parse(await c.req.json());
+    try {
+      const result = await intelligence.getOrCreateThread({
+        threadId,
+        userId: c.get("owner"),
+        agentId: "default",
+        name: "Nouvelle conversation",
+      });
+      return c.json({ threadId: result.thread.id, existing: true }, result.created ? 201 : 200);
+    } catch {
+      throw new AppError(
+        "Conversation could not be created. Check the Rich Threads connection and try again.",
+        502,
+      );
+    }
+  });
   app.get("/api/main-thread", async (c) => {
     if (!intelligence)
       throw new AppError("Rich Threads are not configured for this local workspace", 503);

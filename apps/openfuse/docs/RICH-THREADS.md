@@ -8,7 +8,7 @@ A server-only `CPK_INTELLIGENCE_API_KEY` is required only if a future, explicitl
 
 Never put the key in an `EXPO_PUBLIC_`, `NEXT_PUBLIC_`, or `VITE_` variable. The server constructs `CopilotKitIntelligence`, and `identifyUser` resolves the owner from a verified session. The inherited live setup uses a single shared access key and does not provide multi-user account isolation; do not treat it as production authentication. See [CopilotKit's runtime setup](https://docs.copilotkit.ai/intelligence/connect-your-runtime) for configuration details.
 
-When deliberately enabled, the conversation menu can use CopilotKit's `useThreads` hook to list, rename, archive, restore and paginate conversations. The server provisions an owner-bound main thread before its first message. Side chats use separate client thread IDs. Rich tool messages retain task IDs; current task status, browser previews, PDF links and structured artifacts come from authenticated task endpoints rather than permanent URLs embedded in thread messages.
+When deliberately enabled, the conversation menu can use CopilotKit's `useThreads` hook to list, rename, archive, restore and paginate conversations. The server provisions an owner-bound main thread before its first message. Creating a secondary chat calls authenticated `POST /api/threads` before navigation; the server binds its client-generated ID to the verified owner and the default agent, and uses an idempotent get-or-create for safe retries. Without Intelligence configured, secondary chats remain local conversations in the Alineo database. Rich tool messages retain task IDs; current task status, browser previews, PDF links and structured artifacts come from authenticated task endpoints rather than permanent URLs embedded in thread messages.
 
 Automatic thread naming is disabled. Intelligence is a separately configured service and is not bundled with this MIT-licensed application. The current Alineo sample does not upload its local history to Intelligence.
 
@@ -20,4 +20,4 @@ For architecture and boundaries, see the [browser-worker guide](../apps/worker/R
 
 ## Validation scope
 
-The Rich Threads route tests use a mocked Intelligence service boundary. They cover session enforcement, owner scoping, pagination, rename, archive, rich-message preservation and provider failures. They do not replace a live account test for Intelligence WebSocket persistence/replay. No such live test is configured for this Alineo sample.
+The Rich Threads route tests use a mocked Intelligence service boundary. They cover session enforcement, owner scoping, idempotent secondary-thread provisioning, pagination, rename, archive, rich-message preservation and provider failures. They do not replace a live account test for Intelligence WebSocket persistence/replay. No such live test is configured for this Alineo sample.
