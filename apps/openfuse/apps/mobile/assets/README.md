@@ -1,0 +1,9 @@
+# Alineo artwork and icon provenance
+
+`alineo-flow-mark.png` is Alineo's current generated product mark, used by the welcome screen, navigation, Expo app icon and web favicon. It is a smooth ribbon monogram on a graphite ground; the assistant artwork remains separate.
+
+Generation prompt: “Design a distinctive premium app icon for Alineo, a calm personal AI workspace. Square 1:1 composition, dark near-black graphite background (#111316), clean vector-like minimalism with generous negative space. Create one elegant continuous flowing ribbon that traces a subtle abstract lowercase ‘a’ / alignment path: two rounded, fluid strokes crossing once and opening upward, suggesting everything finding its place. Use restrained luminous gradient from cool aqua and soft teal into a small lavender highlight; crisp edges, gentle depth, no heavy glow, no gold, no horizon, no sun, no mascot. Must remain instantly legible when reduced to 32 pixels and work against dark and light UI. No lettering, no extra symbols, no border, no mockup, no watermark.”
+
+`capybara.png` is historical artwork from an earlier OpenFuse build and is not used by Alineo. The shared assistant mark is the animated OpenDuet MicOrb in `../src/mic-orb.tsx`; its web renderer and native SVG fallback are adapted from CopilotKit/OpenDuet commit `55f1ef113584e748bc2abb7c0d8d97753e9748db`. Attribution and the MIT notice are in `../third-party-licenses/OpenDuet-MIT-LICENSE.txt`.
+
+Gmail and Google Calendar connection rows use only their individual icon modules from `thesvg@4.0.16` (`thesvg/gmail` and `thesvg/google-calendar`). The icon records identify their artwork as CC0-1.0; the library package is MIT-licensed, with its notice at `../third-party-licenses/thesvg-MIT-LICENSE.txt`. Other UI actions continue using Lucide, rather than repurposing brand marks as generic controls.

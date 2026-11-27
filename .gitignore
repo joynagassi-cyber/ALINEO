@@ -1,0 +1,24 @@
+# Dependencies and build outputs
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+dist-server/
+**/dist-server/
+coverage/
+**/coverage/
+.vite/
+**/.vite/
+
+# Local environment secrets (keep examples tracked)
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/

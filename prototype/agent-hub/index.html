@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#070b11" />
+    <meta name="description" content="Prototype visuel non connecté d’un hub agentique centré sur le chat." />
+    <title>Chat — Agent Hub, aperçu</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#page-view">Aller au contenu principal</a>
+    <div class="ambient-shell">
+      <div class="hub-window">
+        <aside class="side-rail" aria-label="Navigation du prototype Agent Hub">
+          <a class="brand-home" href="#chat" data-page="chat" aria-label="Agent Hub, ouvrir le chat">
+            <span class="brand-glyph" aria-hidden="true"><i></i><i></i><i></i></span>
+          </a>
+          <nav class="rail-nav" aria-label="Sections du hub">
+            <button class="rail-button is-current" type="button" data-page="chat" aria-current="page" aria-label="Chat" title="Chat">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 5.5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-7l-5.5 3v-3H5a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2Z"/><path d="M7.5 10h9m-9 3.5h6"/></svg>
+              <span class="nav-label">Chat</span>
+            </button>
+            <button class="rail-button" type="button" data-page="connectors" aria-label="Connecteurs" title="Connecteurs">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M8 7V4m8 3V4M7 8h10v5a5 5 0 0 1-10 0V8Z"/><path d="M12 18v2m-3 0h6"/></svg>
+              <span class="nav-label">Connecteurs</span>
+            </button>
+            <button class="rail-button" type="button" data-page="progress" aria-label="Progression" title="Progression">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 19.5h16M6.5 16V11m5 5V5m5 11V8"/><path d="m5 8 5-3 5 2 4-4"/></svg>
+              <span class="nav-label">Progression</span>
+            </button>
+            <button class="rail-button" type="button" data-page="insights" aria-label="Insights" title="Insights">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"/><path d="m19 16 .8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8L19 16Z"/></svg>
+              <span class="nav-label">Insights</span>
+            </button>
+            <button class="rail-button mobile-activity-button" type="button" data-page="activity" aria-label="Activité" title="Activité">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 12h4l2.1-5 4 10 2.2-5H21"/><path d="M3 5v14h18"/></svg>
+              <span class="nav-label">Activité</span>
+            </button>
+          </nav>
+          <div class="rail-footer">
+            <span class="rail-divider" aria-hidden="true"></span>
+            <button class="rail-button" type="button" data-page="activity" aria-label="Activité" title="Activité">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 12h4l2.1-5 4 10 2.2-5H21"/><path d="M3 5v14h18"/></svg>
+              <span class="nav-label">Activité</span>
+            </button>
+            <span class="offline-dot" role="img" aria-label="Prototype local, aucun service connecté"></span>
+          </div>
+        </aside>
+
+        <main class="main-panel">
+          <header class="main-topbar">
+            <p class="section-marker">AGENT HUB <span aria-hidden="true">/</span> <span id="section-name">CHAT</span></p>
+            <span class="offline-badge"><i aria-hidden="true"></i>Aperçu non connecté</span>
+          </header>
+          <section id="page-view" class="view-container" aria-live="polite" tabindex="-1"></section>
+        </main>
+      </div>
+    </div>
+    <noscript><p class="noscript-note">Activez JavaScript pour afficher cette maquette locale. Aucun service externe n’est utilisé.</p></noscript>
+  </body>
+</html>

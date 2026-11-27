@@ -1,0 +1,24 @@
+{
+  "expo": {
+    "name": "Alineo",
+    "slug": "alineo",
+    "scheme": "alineo",
+    "version": "0.1.0",
+    "orientation": "default",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "icon": "./assets/alineo-flow-mark.png",
+    "ios": { "supportsTablet": true, "bundleIdentifier": "app.alineo.mobile" },
+    "android": { "package": "app.alineo.mobile" },
+    "web": {
+      "bundler": "metro",
+      "name": "Alineo — Tout votre quotidien, mieux aligné.",
+      "favicon": "./assets/alineo-flow-mark.png"
+    },
+    "plugins": [
+      "expo-document-picker",
+      "@config-plugins/react-native-blob-util",
+      "@config-plugins/react-native-pdf"
+    ]
+  }
+}

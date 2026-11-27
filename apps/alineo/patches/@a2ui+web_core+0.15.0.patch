@@ -1,0 +1,22 @@
+diff --git a/node_modules/@a2ui/web_core/src/resolution/data-context.js b/node_modules/@a2ui/web_core/src/resolution/data-context.js
+index 12ef7db..ab5a776 100644
+--- a/node_modules/@a2ui/web_core/src/resolution/data-context.js
++++ b/node_modules/@a2ui/web_core/src/resolution/data-context.js
+@@ -66,8 +66,15 @@ export function getKnownSchemaKeys(schema) {
+                 }
+                 return null;
+             }
+-            if (current instanceof z.ZodEffects || current._def?.typeName === 'ZodEffects') {
+-                current = current._def.schema;
++            const def = current._def ?? current.def;
++            const typeName = def?.typeName;
++            if (typeName === 'ZodEffects' || current.constructor?.name === 'ZodEffects') {
++                current = def.schema;
++                continue;
++            }
++            // Zod 4 replaced ZodEffects wrappers with ZodPipe.
++            if (def?.type === 'pipe' && def.in) {
++                current = def.in;
+                 continue;
+             }
+             if (current instanceof z.ZodOptional ||
